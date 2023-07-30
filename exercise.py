@@ -98,13 +98,13 @@ import numpy as np
 
 def predict_proba(sentences):
   probs = np.zeros((len(sentences), 2), dtype=float)
+  preds = classifier(sentences)
   for i in range(len(sentences)):
-    with torch.no_grad():
-      pred = classifier(sentences[i])
-    lb = int(pred[0]['label'][-1])
-    probs[i, lb] = pred[0]['score']
+    lb = int(preds[i]['label'][-1])
+    probs[i, lb] = preds[i]['score']
     probs[i, 1 - lb] = 1 - probs[i, lb]
   return probs
+
 
 def compute_lime_saliency(dl, class_names):
   explanations = []
