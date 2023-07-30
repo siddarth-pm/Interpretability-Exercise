@@ -1,5 +1,5 @@
 import transformers
-import tabulate
+from tabulate import tabulate
 import tqdm as tqdm
 import datasets
 import torch
@@ -258,7 +258,7 @@ def gradient_saliency_metrics():
     print("Gradient DF_MIT: ", gradient_df_mit)
     print("Gradient DF_Frac: ", gradient_df_frac)
 
-    return [avg_gradient_sufficiency, avg_gradient_comprehensiveness, gradient_df_mit, gradient_df_frac]
+    return ["Gradient", avg_gradient_sufficiency, avg_gradient_comprehensiveness, gradient_df_mit, gradient_df_frac]
 
 def occlusion_saliency_metrics():
     occlusion_explanations = compute_occlusion_saliency(classifier, dataloader)
@@ -278,7 +278,7 @@ def occlusion_saliency_metrics():
     print("Occlusion Comprehensiveness: ", avg_occlusion_comprehensiveness)
     print("Occlusion DF_MIT: ", occlusion_df_mit)
     print("Occlusion DF_Frac: ", occlusion_df_frac)
-    return [avg_occlusion_sufficiency, avg_occlusion_comprehensiveness, occlusion_df_mit, occlusion_df_frac]
+    return ["Occlusion", avg_occlusion_sufficiency, avg_occlusion_comprehensiveness, occlusion_df_mit, occlusion_df_frac]
 
 def LIME_saliency_metrics():
     lime_explanations = compute_lime_saliency(dataloader, [0, 1])
@@ -298,7 +298,7 @@ def LIME_saliency_metrics():
     print("LIME Comprehensiveness: ", avg_lime_comprehensiveness)
     print("LIME DF_MIT: ", lime_df_mit)
     print("LIME DF_Frac: ", lime_df_frac)
-    return [avg_lime_sufficiency, avg_lime_comprehensiveness, lime_df_mit, lime_df_frac]
+    return ["LIME", avg_lime_sufficiency, avg_lime_comprehensiveness, lime_df_mit, lime_df_frac]
 
 if __name__ == "__main__":
   print("Starting evaluation process.")
